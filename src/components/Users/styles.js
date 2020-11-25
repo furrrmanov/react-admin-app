@@ -5,7 +5,7 @@ const styles = {
   image: {
     height: '50px',
     width: '50px',
-    borderRadius: "50%",
+    borderRadius: '50%',
   },
 }
 

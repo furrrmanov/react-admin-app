@@ -2,6 +2,8 @@ import {
   FirebaseAuthProvider,
   FirebaseDataProvider,
 } from 'react-admin-firebase'
+import * as firebase from 'firebase/app'
+import 'firebase/firestore';
 
 const config = {
   apiKey: 'AIzaSyDpDrgUW6crHfEWIbLvUC1s51vj73BXy70',
@@ -11,9 +13,11 @@ const config = {
   storageBucket: 'react-admin-e3ca5.appspot.com',
   messagingSenderId: '575527788161',
   appId: '1:575527788161:web:66e4b92d068f026a63b780',
-} 
+}
 
 const options = {}
+export const app = firebase.initializeApp(config);
 
+export const storage = app.storage();
 export const dataProvider = FirebaseDataProvider(config, options)
 export const authProvider = FirebaseAuthProvider(config, options)

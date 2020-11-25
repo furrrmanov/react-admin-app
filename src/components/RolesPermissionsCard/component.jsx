@@ -1,35 +1,31 @@
 import React, { useState } from 'react'
-import { useListContext, useDataProvider } from 'react-admin'
+import { useDataProvider } from 'react-admin'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
-import Card from '@material-ui/core/Card'
+import { Card, CardContent } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import SaveIcon from '@material-ui/icons/Save'
 
 const cardWrapperStyle = {
   display: 'flex',
-  alignItems: 'center',
-  padding: '5px 0 5px 0',
+  flexWrap: 'wrap',
+  justifyContent: 'start',
+  overflow: 'hidden',
+  width: '100%',
 }
 
 const cardStyles = makeStyles({
-  card: {
-    height: '20px',
-    borderRadius: '5px',
-    padding: '5px',
-    marginRight: '5px',
-    backgroundColor: '#c4d6fb',
+  content: {
+    textAlign: 'center',
   },
-})
-
-const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? 'lightblue' : 'transparent',
-  borderRadius: '5px',
-  display: 'flex',
-  alignItems: 'center',
-  flexWrap: 'wrap',
-  justifyContent: 'start',
-  width: '100%',
+  card: {
+    margin: '8px',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    background: '#c1ecff',
+    minWidth: '200px',
+  },
 })
 
 const buttonSaveStyles = {
@@ -49,11 +45,16 @@ const buttonSaveStyles = {
 
 const MaterialCardField = ({ record = {}, source }) => {
   const classes = cardStyles()
-  return <Card className={classes.card}>{record[source]}</Card>
+
+  return (
+    <Card className={classes.card}>
+      <CardContent className={classes.content}>{record[source]}</CardContent>
+    </Card>
+  )
 }
 
-const CardsList = ({ record }) => {
-  const { ids, data } = useListContext()
+const CardsList = (props) => {
+  const { ids, data } = props
   const [showBauttonSave, setShowBauttonSave] = useState(false)
   const [pemissions, setPermissions] = useState(ids)
   const dataProvider = useDataProvider()
@@ -67,13 +68,15 @@ const CardsList = ({ record }) => {
   }
 
   const hadleOnClickButtonSave = () => {
-    dataProvider.update('roles', {
-      id: record.id,
-      data: {
-        name: record.name,
-        permissions: pemissions,
-      },
-    }).then(setShowBauttonSave(false))
+    dataProvider
+      .update('roles', {
+        id: props.record.id,
+        data: {
+          name: props.record.name,
+          permissions: pemissions,
+        },
+      })
+      .then(setShowBauttonSave(false))
   }
 
   const onDragEnd = (result) => {
@@ -92,13 +95,13 @@ const CardsList = ({ record }) => {
   }
 
   return (
-    <div style={cardWrapperStyle}>
+    <div>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable" direction="horizontal">
+        <Droppable droppableId="droppable" direction="grid">
           {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
+              style={cardWrapperStyle}
               {...provided.droppableProps}>
               {pemissions.map((id, index) => (
                 <Draggable key={id} draggableId={id} index={index}>

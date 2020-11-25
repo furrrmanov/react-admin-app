@@ -8,22 +8,31 @@
     "@testing-library/user-event": "^12.1.10",
     "firebase": "^7.24.0",
     "ra-auth-firebase-client": "^3.0.0",
+    "ra-core": "^3.9.6",
     "ra-data-firebase-client": "^3.0.0",
+    "ra-i18n-polyglot": "^3.9.6",
+    "ra-language-english": "^3.9.6",
+    "ra-language-russian": "^3.3.0",
     "react": "^17.0.1",
     "react-admin": "^3.9.5",
     "react-admin-firebase": "^3.2.6",
-    "react-beautiful-dnd": "^13.0.0",
+    "react-app-rewire-alias": "^0.1.6",
+    "react-app-rewired": "^2.1.6",
+    "react-beautiful-dnd": "npm:aligned-rbd@^13.0.0-aligned0.0.2mod",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.2.1",
     "react-scripts": "4.0.0",
     "sort-by": "^1.2.0",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "workbox-sw": "^5.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "firebase-login": "firebase login",
+    "firebase-deploy": "firebase deploy"
   },
   "eslintConfig": {
     "extends": [

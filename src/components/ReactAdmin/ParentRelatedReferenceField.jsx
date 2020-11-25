@@ -1,13 +1,10 @@
 import * as React from 'react'
-import { Children, cloneElement,memo, } from 'react'
+import { Children, cloneElement, memo } from 'react'
+
 import PropTypes from 'prop-types'
 import { LinearProgress } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  ListContextProvider,
-  useReferenceArrayFieldController,
-} from 'ra-core'
-
+import { ListContextProvider, useReferenceArrayFieldController } from 'ra-core'
 
 const sanitizeRestProps = ({
   addLabel,
@@ -32,8 +29,7 @@ const sanitizeRestProps = ({
   textAlign,
   translateChoice,
   ...props
-}) => props;
-
+}) => props
 
 const ParentRelatedReferenceField = (props) => {
   const {
@@ -73,7 +69,6 @@ const ParentRelatedReferenceField = (props) => {
 }
 
 ParentRelatedReferenceField.propTypes = {
-  // ...fieldPropTypes,
   addLabel: PropTypes.bool,
   basePath: PropTypes.string,
   classes: PropTypes.object,
@@ -98,10 +93,7 @@ const useStyles = makeStyles(
   { name: 'RaReferenceArrayField' }
 )
 
-
-export const ReferenceArrayFieldView = (
-  props
-) => {
+export const ReferenceArrayFieldView = (props) => {
   const { children, pagination, className, reference, record, ...rest } = props
   const classes = useStyles(props)
 
@@ -119,8 +111,7 @@ export const ReferenceArrayFieldView = (
       })}{' '}
       {pagination &&
         props.total !== undefined &&
-        cloneElement(pagination, sanitizeRestProps(rest))
-        }
+        cloneElement(pagination, sanitizeRestProps(rest))}
     </>
   )
 }
